@@ -32,12 +32,12 @@ class App extends Component {
             
             <div>
               
-                {this.state.songs > 0 &&
+                {/* {this.state.songs > 0 && */}
                 <div>
                   <h1> Complete Songs List</h1>
-                  <h2>{this.state.songs[0]}</h2>
+                  <h2>{this.state.songs.map(song => <div>Title: {song.title}<br></br> Artist: {song.artist}<br></br> Ablum: {song.album}<br></br> Release Date : {song.release_date}<br></br> Genre: {song.genre} <br></br>Amount of Likes: {song.likes}<br></br><br></br></div>)}</h2>
                   </div>
-                }
+               
                  
             </div>
 
