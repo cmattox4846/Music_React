@@ -6,22 +6,19 @@ class AddNewSong extends Component {
     constructor(props) {
         super(props);
         this.state = {  
-            id: this.props.arrayNumber,
+
             title: '',
             artist: '',
             album: '',
             genre: '',
             release_date: '',
             likes:0
-
-
-
         }
     }
+
     handleChange=(event)=>{
       this.setState({
             [event.target.name]:event.target.value,
-            [event.target.name]:this.id
         });
 
     }
@@ -29,18 +26,15 @@ class AddNewSong extends Component {
    
 
 
-    handleSubmit=(event,props)=>{
+    handleSubmit = (event) => {
         event.preventDefault();
         this.props.addSong(this.state)
-        
-        
     }
 
     render() { 
         return (
             <form onSubmit={this.handleSubmit}>
-                <label>ID</label>
-                <input name='id' onChange={this.handleChange} value={this.state.id} />
+                
                 <label>Title</label>
                 <input name='title' onChange={this.handleChange} value={this.state.title}/>
                 <label>Artist</label>

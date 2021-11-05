@@ -3,7 +3,7 @@ import axios from 'axios'
 import "./App.css" 
 import CompleteSongsList from './CompleteSongsList/CompleteSongsList';
 import AddNewSong from './CompleteSongsList/AddNewSong/AddNewSong';
-import SingleSongDisplay from './CompleteSongsList/SingleSongDisplay/SingleSongDisplay';
+import SearchBar from './CompleteSongsList/SearchBar/SearchBar';
 
 
 
@@ -11,40 +11,50 @@ class App extends Component {
    
         state = { 
             songs:[],
-            id: this.props.arrayNumber,
-            title: '',
-            artist: '',
-            album: '',
-            genre: '',
-            release_date: '',
-            likes:0,
-            songCount:0
          }
     
     
     componentDidMount=()=>{
         this.loadSongs()
     }
+
+    filterSongsByValue = (searchTerm) => {
+
+        let filteredSongs = this.state.songs.filter(function(song){
+            if(song.title.includes(searchTerm)){
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        this.setState({
+            songs: filteredSongs
+        })
+
+    }
     
-    loadSongs=async()=>{
+    loadSongs = async () => {
         let response = await axios.get('http://127.0.0.1:8000/music/')
         this.setState({
             songs:response.data
         })
     }    
 
-    addSong=async()=>{
-        let title = this.state.title
-        let artist = this.state.artist
-        let album = this.state.album
-        let genre = this.state.genre
-        let release_date = this.state.release_date
-        let likes = this.state.likes
+    addSong = async (objectBeingPassedIn) => {
 
-        await axios.post('http://127.0.0.1:8000/music/', title,artist,album,genre,release_date,likes)
-        this.setState({
-            songCount: this.songCount +1
-        })
+        let newSong = {
+            title: objectBeingPassedIn.title,
+            artist: objectBeingPassedIn.artist,
+            album: objectBeingPassedIn.album,
+            genre: objectBeingPassedIn.genre,
+            release_date: objectBeingPassedIn.release_date,
+            likes: objectBeingPassedIn.likes 
+        }
+
+        await axios.post('http://127.0.0.1:8000/music/', newSong)
+
+        this.loadSongs()
 
     }
     
@@ -59,8 +69,9 @@ class App extends Component {
                 <div>
                   
                  <CompleteSongsList songs={this.state.songs}/>
-                 <AddNewSong songs={this.state.songs} addSong={this.addSong()} />
-                 <SingleSongDisplay songs={this.state.songs} />
+                 <button onClick={()=>this.loadSongs()}>Complete List</button>
+                 <AddNewSong songs={this.state.songs} addSong={this.addSong} />
+                 <SearchBar filterSongsByValue={this.filterSongsByValue}/>
                 </div>
                
                 
