@@ -2,13 +2,23 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import "./App.css" 
 import CompleteSongsList from './CompleteSongsList/CompleteSongsList';
+import AddNewSong from './CompleteSongsList/AddNewSong/AddNewSong';
+import SingleSongDisplay from './CompleteSongsList/SingleSongDisplay/SingleSongDisplay';
 
 
 
 class App extends Component {
    
         state = { 
-            songs:[]
+            songs:[],
+            id: this.props.arrayNumber,
+            title: '',
+            artist: '',
+            album: '',
+            genre: '',
+            release_date: '',
+            likes:0,
+            songCount:0
          }
     
     
@@ -21,24 +31,39 @@ class App extends Component {
         this.setState({
             songs:response.data
         })
-
     }    
-    
+
+    addSong=async()=>{
+        let title = this.state.title
+        let artist = this.state.artist
+        let album = this.state.album
+        let genre = this.state.genre
+        let release_date = this.state.release_date
+        let likes = this.state.likes
+
+        await axios.post('http://127.0.0.1:8000/music/', title,artist,album,genre,release_date,likes)
+        this.setState({
+            songCount: this.songCount +1
+        })
+
+    }
     
     render() { 
         
         return ( 
-            console.log(this.state.songs[0]),
+           
             
             <div>
               
-                {/* {this.state.songs > 0 && */}
+                
                 <div>
-                  <h1> Complete Songs List</h1>
-                  <h2>{this.state.songs.map(song => <div>Title: {song.title}<br></br> Artist: {song.artist}<br></br> Ablum: {song.album}<br></br> Release Date : {song.release_date}<br></br> Genre: {song.genre} <br></br>Amount of Likes: {song.likes}<br></br><br></br></div>)}</h2>
-                  </div>
+                  
+                 <CompleteSongsList songs={this.state.songs}/>
+                 <AddNewSong songs={this.state.songs} addSong={this.addSong()} />
+                 <SingleSongDisplay songs={this.state.songs} />
+                </div>
                
-                 
+                
             </div>
 
          );
