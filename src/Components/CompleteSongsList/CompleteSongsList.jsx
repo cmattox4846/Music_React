@@ -1,6 +1,8 @@
 import React from 'react';
 
 const CompleteSongsList = (props) => {
+    
+
     return (
         <div>
             <h1> Complete Songs List</h1>
@@ -18,13 +20,14 @@ const CompleteSongsList = (props) => {
         </thead>
         <tbody>
             <tr>
-               
+            <th scope="row"> <h4>{props.songs.map(song =><div>{<button onClick={()=>props.updateSongChoice(song)}>Update</button>}</div> )}</h4></th>
             <th scope="row"><h4>{props.songs.map(song =><div>{song.title}</div> )}</h4></th>
             <th scope="row"><h4>{props.songs.map(song =><div>{song.artist}</div> )}</h4></th>
             <th scope="row"><h4>{props.songs.map(song =><div>{song.album}</div> )}</h4></th>
             <th scope="row"><h4>{props.songs.map(song =><div>{song.release_date}</div> )}</h4></th>
             <th scope="row"><h4>{props.songs.map(song =><div>{song.genre}</div> )}</h4></th>
             <th scope="row"><h4>{props.songs.map(song =><div>{song.likes}</div> )}</h4></th>
+            <th scope="row"> <h4>{props.songs.map(song =><div>{<button onClick={()=>props.deleteSong(song.id)}>Delete</button>}</div> )}</h4></th>
             </tr>
             
         </tbody>

@@ -18,10 +18,7 @@ class SearchBar extends Component {
   
       }
   
-     
-  
-  
-      handleSubmit = (event) => {
+    handleSubmit = (event) => {
           event.preventDefault();
           this.props.filterSongsByValue(this.state.title)
       }

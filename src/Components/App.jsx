@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import "./App.css" 
 import CompleteSongsList from './CompleteSongsList/CompleteSongsList';
-import AddNewSong from './CompleteSongsList/AddNewSong/AddNewSong';
-import SearchBar from './CompleteSongsList/SearchBar/SearchBar';
+import AddNewSong from './AddNewSong/AddNewSong';
+import SearchBar from './SearchBar/SearchBar';
+import UpdateSong from './UpdateSong/UpdateSong';
 
 
 
@@ -11,6 +12,7 @@ class App extends Component {
    
         state = { 
             songs:[],
+            
          }
     
     
@@ -35,12 +37,43 @@ class App extends Component {
     }
     
     loadSongs = async () => {
+        
         let response = await axios.get('http://127.0.0.1:8000/music/')
         this.setState({
             songs:response.data
         })
     }    
+    updateSong = async (songID,updateInfo)=>{
 
+        let updatedSongInfo = {
+            title: updateInfo.title,
+            artist: updateInfo.artist,
+            album: updateInfo.album,
+            genre: updateInfo.genre,
+            release_date: updateInfo.release_date,
+            likes: updateInfo.likes 
+        }
+
+
+        await axios.put('http://127.0.0.1:8000/music/'+ songID +'/', updatedSongInfo)
+
+        this.loadSongs()
+        
+    }
+
+
+    updateSongChoice=(song)=>{
+        UpdateSong(song)
+        
+    }
+
+    deleteSong = async (songID)=> {
+        debugger
+        
+        await axios.delete('http://127.0.0.1:8000/music/'+ songID +'/')
+
+        this.loadSongs()
+    }
     addSong = async (objectBeingPassedIn) => {
 
         let newSong = {
@@ -67,11 +100,16 @@ class App extends Component {
               
                 
                 <div>
-                  
-                 <CompleteSongsList songs={this.state.songs}/>
-                 <button onClick={()=>this.loadSongs()}>Complete List</button>
-                 <AddNewSong songs={this.state.songs} addSong={this.addSong} />
-                 <SearchBar filterSongsByValue={this.filterSongsByValue}/>
+                <SearchBar filterSongsByValue={this.filterSongsByValue}/> <button onClick={()=>this.loadSongs()}>Reset List</button>
+                <br/><br/><br/><br/><CompleteSongsList songs={this.state.songs} deleteSong={this.deleteSong} updateSongChoice={this.updateSongChoice}/>
+                 
+                 <div><br/><br/> Added New Song Here!<AddNewSong songs={this.state.songs} addSong={this.addSong} /></div>
+                 
+                 <div><br/><br/> Update Song here!
+                 <UpdateSong songs={this.state.songs} updateSong={this.updateSong} /></div>
+                
+
+
                 </div>
                
                 
