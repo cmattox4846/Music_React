@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './SearchBar.css'
 
 class SearchBar extends Component {
 
@@ -33,7 +34,7 @@ class SearchBar extends Component {
             <input name='title' onChange={this.handleChange} value={this.state.title}/>
             
             
-            <button type="submit">Search Songs</button>
+            <button type="submit"className="btn btn-primary button1">Search Songs</button>
 
 
         </form>

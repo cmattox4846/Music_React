@@ -1,4 +1,6 @@
 import React from 'react';
+import FilterFields from '../FilterSongs/FilterSongs';
+
 
 const CompleteSongsList = (props) => {
     

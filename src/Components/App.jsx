@@ -5,6 +5,7 @@ import CompleteSongsList from './CompleteSongsList/CompleteSongsList';
 import AddNewSong from './AddNewSong/AddNewSong';
 import SearchBar from './SearchBar/SearchBar';
 import UpdateSong from './UpdateSong/UpdateSong';
+import FilterFields from './FilterSongs/FilterSongs';
 
 
 
@@ -25,7 +26,25 @@ class App extends Component {
         let filteredSongs = this.state.songs.filter(function(song){
             if(song.title.includes(searchTerm)){
                 return true;
-            }else{
+            }
+            
+            else if (song.album.includes(searchTerm)){
+                return true;
+            }
+
+            else if (song.artist.includes(searchTerm)){
+                return true;
+            }
+
+            else if(song.genre.includes(searchTerm)){
+                return true;
+            }
+
+            else if(song.release_date.includes(searchTerm)){
+                return true;
+            }
+            
+            else{
                 return false;
             }
         });
@@ -94,26 +113,40 @@ class App extends Component {
     render() { 
         
         return ( 
-           
-            
             <div>
-              
-                
+                <nav className="navbar navbar-inverse">
+                    <div className = "container-fuild">
+                    
+                        <div className="nav navbar-header">
+                            <SearchBar filterSongsByValue={this.filterSongsByValue}/> <button className="btn btn-primary" onClick={()=>this.loadSongs()}>Reset List</button>
+                        </div>
+                    </div>
+                </nav>
+
                 <div>
-                <SearchBar filterSongsByValue={this.filterSongsByValue}/> <button onClick={()=>this.loadSongs()}>Reset List</button>
-                <br/><br/><br/><br/><CompleteSongsList songs={this.state.songs} deleteSong={this.deleteSong} updateSongChoice={this.updateSongChoice}/>
-                 
-                 <div><br/><br/> Added New Song Here!<AddNewSong songs={this.state.songs} addSong={this.addSong} /></div>
-                 
-                 <div><br/><br/> Update Song here!
-                 <UpdateSong songs={this.state.songs} updateSong={this.updateSong} /></div>
-                
+                    <CompleteSongsList songs={this.state.songs} deleteSong={this.deleteSong} updateSongChoice={this.updateSongChoice}/>
+                </div>    
+                  
+                <div>
+                    <br/><br/> Added New Song Here!<AddNewSong songs={this.state.songs} addSong={this.addSong} />
+                </div>
+                    
+                <div>
+                    <br/><br/> Update Song here!<UpdateSong songs={this.state.songs} updateSong={this.updateSong} />
+                </div>
+
+                <div>
+                    <br/><br/>Filter Songs here!<FilterFields songs={this.state.songs} filterSongsByValue={this.filterSongsByValue} />
+                </div>
+                    
 
 
                 </div>
-               
                 
-            </div>
+                    
+               
+           
+            
 
          );
     }
