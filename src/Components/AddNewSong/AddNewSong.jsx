@@ -29,26 +29,29 @@ class AddNewSong extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.addSong(this.state)
+        this.setState({
+            likes:this.state.likes
+        })
     }
 
     render() { 
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form clasName='form-group'onSubmit={this.handleSubmit}>
                 
-                <label>Title</label>
-                <input name='title' onChange={this.handleChange} value={this.state.title}/>
-                <label>Artist</label>
+                <label>Title</label><br/>
+                <input name='title' onChange={this.handleChange} value={this.state.title}/><br/>
+                <label>Artist</label><br/>
                 <input name="artist" onChange={this.handleChange} value={this.state.artist}/>
-                <label>Album</label>
+                <label>Album</label><br/>
                 <input name='album' onChange={this.handleChange} value={this.state.album}/>
-                <label>Genre</label>
+                <label>Genre</label><br/>
                 <input name="genre" onChange={this.handleChange} value={this.state.genre}/>
-                <label>Release Date</label>
+                <label>Release Date</label><br/>
                 <input name='release_date' onChange={this.handleChange} value={this.state.release_date}/>
-                <label>Likes</label>
-                <input name='likes' onLoad={this.handleChange} value={this.state.likes} readOnly/>
+                <label>Likes</label><br/>
+                <input name='likes' onLoad={this.handleChange} value={this.state.likes} readOnly/><br/>
                 
-                <button type="submit">Create</button>
+                <button className="btn btn-primary my-2 btn-sm" type="submit">Create</button>
 
 
             </form>

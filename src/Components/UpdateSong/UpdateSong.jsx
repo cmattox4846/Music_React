@@ -48,8 +48,8 @@ class UpdateSong extends Component {
                 <input name='release_date'onLoad={this.state.release_date} onChange={this.handleChange} value={this.state.release_date}/>
                 <label>Likes</label>
                 <input name='likes'onLoad={this.state.likes} onChange={this.handleChange} value={this.state.likes} readOnly/>
-                
-                <button type="submit">Create</button>
+                <br/>
+                <button className="btn btn-primary my-2 btn-sm " type="submit">Create</button>
 
 
             </form>

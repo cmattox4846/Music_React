@@ -57,7 +57,7 @@ class FilterFields extends Component {
                 <label>Filter By Artist</label>
                 <input name='artist' onChange={this.handleChange} value={this.state.artist}/>
                 
-            <button type="submit">Filter By Artist</button>
+            <button className="btn btn-primary btn-sm my-2" type="submit">Filter By Artist</button>
 
             </form>
 
@@ -66,7 +66,7 @@ class FilterFields extends Component {
                 <label>Filter By Album</label>
                 <input name='album' onChange={this.handleChange} value={this.state.album}/>
             
-            <button type="submit">Filter By album</button>
+            <button className="btn btn-primary btn-sm my-2" type="submit">Filter By album</button>
 
             </form>
 
@@ -75,7 +75,7 @@ class FilterFields extends Component {
                 <label>Filter By Genre</label>
                 <input name='genre' onChange={this.handleChange} value={this.state.genre}/>
               
-            <button type="submit">Filter By Genre</button>
+            <button className="btn btn-primary btn-sm my-2" type="submit">Filter By Genre</button>
 
             </form>
 
@@ -85,7 +85,7 @@ class FilterFields extends Component {
                 <input name='release_date' onChange={this.handleChange} value={this.state.release_date}/>
                 
             
-            <button type="submit">Filter By Release Date</button>
+            <button className="btn btn-primary btn-sm my-2" type="submit">Filter By Release Date</button>
 
 
         </form>

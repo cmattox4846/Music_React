@@ -6,7 +6,8 @@ class SearchBar extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            title:''
+            title:'Search Titles',
+            titleClear:""
          }
     }
 
@@ -27,17 +28,20 @@ class SearchBar extends Component {
       
 
     render() { 
-        return (  
-            <form onSubmit={this.handleSubmit}>
-                
-            <label>Search Titles</label>
-            <input name='title' onChange={this.handleChange} value={this.state.title}/>
-            
-            
-            <button type="submit"className="btn btn-primary button1">Search Songs</button>
+        return ( 
+            <div className="ms-2 me-2">
+                <form onSubmit={this.handleSubmit}>
+
+                        
+                    <label></label>
+                    <input className=" ms-2 me-2" name='title'  onChange={this.handleChange} value={this.state.title}/>
+                    
+                    
+                    <button type="submit"className="btn btn-link button1 ms-2 me-2">Search Songs</button>
 
 
-        </form>
+                </form>
+        </div> 
 
         );
     }

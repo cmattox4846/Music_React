@@ -6,6 +6,9 @@ import AddNewSong from './AddNewSong/AddNewSong';
 import SearchBar from './SearchBar/SearchBar';
 import UpdateSong from './UpdateSong/UpdateSong';
 import FilterFields from './FilterSongs/FilterSongs';
+import './App.css'
+
+
 
 
 
@@ -113,35 +116,42 @@ class App extends Component {
     render() { 
         
         return ( 
-            <div>
-                <nav className="navbar navbar-inverse">
-                    <div className = "container-fuild">
+            <div className="container-fluid ps-2" >
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <span class="navbar-brand mb-0 h1">Musical MerryGoRound</span>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav alignr">
+                            <SearchBar filterSongsByValue={this.filterSongsByValue}/>
+                            
+                               
+                            </div>
+                            </div>
+                        </div>
+                </nav>
+               
+            
+                <div className='container-fluid w-200 p-3'>
+                    <div className='row col-md-12'>
+                        <div className="col  overflow-visible sidebar1 w-200 p-3" > 
+                            Added New Song Here!<AddNewSong songs={this.state.songs} addSong={this.addSong} /> <br/>
+                            Update Song here!<UpdateSong songs={this.state.songs} updateSong={this.updateSong} />
+                        </div>
                     
-                        <div className="nav navbar-header">
-                            <SearchBar filterSongsByValue={this.filterSongsByValue}/> <button className="btn btn-primary" onClick={()=>this.loadSongs()}>Reset List</button>
+                        <div className="col-md-7 border1"> 
+                            <CompleteSongsList songs={this.state.songs} deleteSong={this.deleteSong} updateSongChoice={this.updateSongChoice}/>
+                        </div>
+                        
+                        <div className="col sidebar1">
+                            Filter Songs here!<FilterFields songs={this.state.songs} filterSongsByValue={this.filterSongsByValue} />
                         </div>
                     </div>
-                </nav>
-
-                <div>
-                    <CompleteSongsList songs={this.state.songs} deleteSong={this.deleteSong} updateSongChoice={this.updateSongChoice}/>
-                </div>    
-                  
-                <div>
-                    <br/><br/> Added New Song Here!<AddNewSong songs={this.state.songs} addSong={this.addSong} />
                 </div>
-                    
-                <div>
-                    <br/><br/> Update Song here!<UpdateSong songs={this.state.songs} updateSong={this.updateSong} />
-                </div>
-
-                <div>
-                    <br/><br/>Filter Songs here!<FilterFields songs={this.state.songs} filterSongsByValue={this.filterSongsByValue} />
-                </div>
-                    
-
-
-                </div>
+        </div>
+               
                 
                     
                
